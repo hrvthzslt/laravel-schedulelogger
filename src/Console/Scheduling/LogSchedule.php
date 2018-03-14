@@ -5,7 +5,7 @@ namespace PendoNL\LaravelScheduleLogger\Console\Scheduling;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Container\Container;
 use Symfony\Component\Process\PhpExecutableFinder;
-use Symfony\Component\Process\ProcessUtils;
+use Illuminate\Support\ProcessUtils;
 
 class LogSchedule extends Schedule
 {
@@ -48,7 +48,7 @@ class LogSchedule extends Schedule
             $command .= ' '.$this->compileParameters($parameters);
         }
 
-        $this->events[] = $event = new LogEvent($this->mutex, $command, $this->rawCommand);
+        $this->events[] = $event = new LogEvent($this->eventMutex, $command, $this->rawCommand);
 
         return $event;
     }
