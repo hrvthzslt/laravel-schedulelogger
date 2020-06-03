@@ -39,7 +39,7 @@ class LaravelScheduleLogger
     {
         $log = Schedulelog::where('end', null)->latest('id', 'DESC')->first();
 
-        if (count($log) == 0) {
+        if (is_null($log)) {
             return Schedulelog::create([
                 'command_name' => $command_name,
                 'start'        => microtime(true),
